@@ -21,8 +21,8 @@
 |         | 题目              | 地址                |
 | ------- | ----------------- | ------------------- |
 | 例题2.4 | 输出梯形          |                     |
-| 例题2.5 | 叠筐              | http://t.cn/E9jcaVb |
-| 习题2.4 | Repeater          | http://t.cn/E9jizni |
+| 例题2.5 | 叠筐              |                     |
+| 习题2.4 | Repeater          | http://t.cn/E9jcaVb |
 | 习题2.5 | Hello World for U | http://t.cn/E9jizni |
 
 ##### 2. 日期问题
@@ -33,5 +33,5 @@
 | 例题2.7 | 打印日期       | http://t.cn/E9YP2a8 |
 | 例题2.8 | 日期累加       | http://t.cn/E9Yw0Cr |
 | 习题2.6 | 日期差值       | http://t.cn/E9Yz0LE |
-| 习题2.7 | Day of Week    | http://t.cn/E9jizni |
+| 习题2.7 | Day of Week    | http://t.cn/E9YZLbi |
 | 习题2.8 | 日期类         | http://t.cn/E9RJUp4 |
