@@ -1,5 +1,4 @@
 #include<iostream>
-#include<string.h>
 using namespace std;
 
 //月份对应天数
