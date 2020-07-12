@@ -1,40 +1,37 @@
 #include<iostream>
-#include<algorithm>
 #include<queue>
+
 using namespace std;
-/**约瑟夫问题 
-*思路：循环队列实现（或是使用普通队列模拟实现循环队列，队首出队后压入队尾） 
-*
-*/
-int main(){
-	int n,p,m;
-	queue<int> children;
-	//多组数据外定义结构，要注意运行每一组时务必是初始化的状态 
-	while(cin>>n>>p>>m){
-		if(n==0&&p==0&&m==0)break;
-		//首先依次入队
-		for(int i=0;i<n;++i){
-			//Tips:先-1，再+1，输出分布[1,n] 
-			children.push((p+i-1)%n+1);
-		} 
-		//开始报数（到m出队/输出）
-		int count=1;
-		while(children.size()!=1){
-			if(count!=m){
-				children.push(children.front());
-				children.pop();
-				++count;
-			}
-			else{
-				cout<<children.front()<<",";
-				children.pop();
-				count=1;
-			}	
-		}
-		cout<<children.front()<<endl;
-		children.pop();
-	}
 
-	return 0;
+int main() {
+    //n，n个小孩；p开始报数；m间隔
+    int n,p,m;
+    while(scanf("%d%d%d",&n,&p,&m)!=EOF) {
+        if(n==0&&p==0&&m==0) {
+            break;
+        }
+        queue<int> children;
+        //初始化队列
+        for(int i=0; i<n; i++) {
+            children.push(i+1);
+        }
+        //使序号为p的小孩到队首
+        for(int i=1; i<p; i++) {
+            children.push(children.front());
+            children.pop();
+        }
+        while(!children.empty()) {
+            for(int i=1; i<m; i++) {
+                children.push(children.front());
+                children.pop();
+            }
+            if(children.size()==1) {
+                printf("%d\n",children.front());
+            } else {
+                printf("%d,",children.front());
+            }
+            children.pop();
+        }
+    }
+    return 0;
 }
-
