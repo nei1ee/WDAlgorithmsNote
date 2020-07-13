@@ -4,32 +4,29 @@
 
 using namespace std;
 
+//)(rttyy())sss)(
 int main() {
     string str;
-    stack<char> temp;
-    string ans="";
     while(cin>>str) {
+        stack<int> brackets;
+        string answer(str.size(),' ');
         for(int i=0; i<str.size(); i++) {
             if(str[i]==')') {
-                if(!temp.empty()) {
-                    temp.pop();
-                    ans+=" ";
+                if(!brackets.empty()) {
+                    brackets.pop();
                 } else {
-                    ans+="?";
+                    answer[i]='?';
                 }
             } else if(str[i]=='(') {
-                if(i==str.size()-1) {
-                    ans+="$";
-                } else {
-                    temp.push(str[i]);
-                    ans+=" ";
-                }
-            } else {
-                ans+=" ";
+                brackets.push(i);
             }
         }
+        while(!brackets.empty()){
+            answer[brackets.top()]='$';
+            brackets.pop();
+        }
         cout<<str<<endl;
-        cout<<ans<<endl;
+        cout<<answer<<endl;
     }
     return 0;
 }
