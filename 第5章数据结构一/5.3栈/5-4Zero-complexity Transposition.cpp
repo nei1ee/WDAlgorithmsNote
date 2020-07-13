@@ -1,27 +1,21 @@
 #include<iostream>
-#include<algorithm>
 #include<stack>
+
 using namespace std;
-/**ÄæĞòÊä³öÎÊÌâ 
-*
-*
-*/
+
 int main(){
 	int n;
-	stack<long long int> s;
-	int num;
-	while(cin>>n){
-		for(int i=0;i<n;++i){
-			cin>>num;
-			s.push(num);
+	stack<long long> num;
+	long long temp;
+	while(scanf("%d",&n)!=EOF){
+		for(int i=0;i<n;i++){
+			cin>>temp;
+			num.push(temp);
 		}
-		cout<<s.top();
-		s.pop();
-		for(int i=1;i<n;++i){
-			cout<<" "<<s.top();
-			s.pop();
+		for(int i=0;i<n;i++){
+			cout<<num.top()<<" ";
+			num.pop();
 		}
 	}
 	return 0;
 }
-
