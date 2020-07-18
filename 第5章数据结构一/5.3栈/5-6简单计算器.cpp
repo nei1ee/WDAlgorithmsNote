@@ -1,82 +1,79 @@
 #include<iostream>
-#include<algorithm>
-#include<string.h>
+#include<string>
 #include<stack>
-#include<cctype> 
+#include<cctype>
+
 using namespace std;
-/**简单计算器，输入会通过空格隔开数字与符号 
-*思路：分为符号栈和数值栈，当入栈符号优先级小于栈顶符号优先级时，计算栈顶符号相关表达式 
-*输入：一串不区分的字母和符号，（可以使用自动机来进行识别，也可以直接单独判断每行中的每个字符）
-*数据的读取和输入是一个难点 
-*/
 
-int getPriority(const char& c){
-	
-	switch(c){
-		case '#':return 0;
-		case '$':return 1;
-		case '+':return 2;
-		case '-':return 2;
-		default:return 3;
-	}
+//优先级顺序#,$,+-,*/
+int priority(char c) {
+    if(c=='#') {
+        return 0;
+    } else if(c=='$') {
+        return 1;
+    } else if(c=='+'||c=='-') {
+        return 2;
+    } else {
+        return 3;
+    }
 }
 
-double getNumber(const string &str, int &index){
-	double number = 0;
-	while(isdigit(str[index])){
-		number = number * 10 + str[index]-'0';
-		++index;
-	}
-	return number;
+//获得数字
+double getNumber(string str,int& index) {
+    double number=0;
+    while(isdigit(str[index])) {
+        number=number*10+str[index]-'0';
+        index++;
+    }
+    return number;
 }
 
-double Calculate(const double& x,const double& y,const char& op){
-	double result = 0;
-	switch(op){
-		case '+':result = x+y;break;
-		case '-':result = x-y;break;
-		case '*':result = x*y;break;
-		case '/':result = x/y;break;
-	}
-	return result ;
+double Calculate(double x,double y,char op) {
+    double ans=0;
+    if(op=='+') {
+        ans=x+y;
+    } else if(op=='-') {
+        ans=x-y;
+    } else if(op=='*') {
+        ans=x*y;
+    } else if(op=='/')  {
+        ans=x/y;
+    }
+    return ans;
 }
 
-int main(){
-	stack<char> sta_op;
-	stack<double> sta_num;
-	string str;
-	while(getline(cin,str)){
-		if(str=="0")break;
-		//index维护一个读取指针
-		int index = 0;
-		sta_op.push('#');//优先级最低，意味着表达式结束
-		str+='$';
-		while(index<str.size()){
-			if(str[index]==' '){
-				++index;
-			}
-			else if(isdigit(str[index])){
-				sta_num.push(getNumber(str,index));
-			}
-			else{
-				if(getPriority(sta_op.top())<getPriority(str[index])){
-					sta_op.push(str[index]);
-					++index;
-				}
-				else{
-					//入栈符号优先级小于栈顶优先级，则先计算栈顶涉及的运算 
-					double y= sta_num.top();
-					sta_num.pop();
-					double x = sta_num.top();
-					sta_num.pop();
-					sta_num.push(Calculate(x,y,sta_op.top()));
-					sta_op.pop();
-				}
-			}
-		} 
-		printf("%.2f\n",sta_num.top());
-	}
-	
-	return 0;
+int main() {
+    string str;
+    while(getline(cin,str)) {
+        if(str=="0") {
+            break;
+        }
+        int index=0;
+        stack<char> oper;
+        stack<double> data;
+        str+='$';
+        oper.push('#');
+        while(index<str.size()) {
+            if(str[index]==' ') {
+                index++;
+            } else if(isdigit(str[index])) {
+                double tt=getNumber(str,index);
+                data.push(tt);
+            } else {
+                if(priority(oper.top())<priority(str[index])) {
+                    oper.push(str[index]);
+                    index++;
+                } else {
+                    double y=data.top();
+                    data.pop();
+                    double x=data.top();
+                    data.pop();
+                    data.push(Calculate(x,y,oper.top()));
+                    oper.pop();
+                }
+            }
+        }
+        printf("%0.2f\n",data.top());
+    }
+    return 0;
 }
-

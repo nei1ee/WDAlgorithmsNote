@@ -1,44 +1,35 @@
 #include<iostream>
-#include<algorithm>
-#include<string.h>
 #include<stack>
+
 using namespace std;
-/**堆栈的使用 
-*根据需要去执行模拟的堆栈的操作 
-*
-*/
-int main(){
-	stack<int> s;
-	int n;
-	char c;
-	while(cin>>n){
-			while(n--){
-			cin>>c;
-			switch(c){
-			
-				case 'P':{
-					int num;
-					cin>>num;
-					s.push(num);
-					break;
-				}
-				case 'O':{
-					if(!s.empty()){
-						s.pop();
-					}
-					break;
-				}
-				case 'A':{
-					if(s.empty())cout<<'E'<<endl;
-					else cout<<s.top()<<endl;
-					break;
-				}
-			}
-		}
-		cout<<endl;
-	}
 
-
-	return 0;
+int main() {
+    int n;
+    while(cin>>n) {
+        stack<int> temp;
+        char type;
+        if(n==0) {
+            break;
+        }
+        for(int i=0; i<n; i++) {
+            cin>>type;
+            if(type=='A') {
+                if(temp.empty()) {
+                    cout<<"E"<<endl;
+                } else {
+                    cout<<temp.top()<<endl;
+                }
+            } else if(type=='P') {
+                int num;
+                cin>>num;
+                temp.push(num);
+            } else if(type=='O') {
+                if(!temp.empty()) {
+                    temp.pop();
+                }
+            }
+        }
+        cout<<endl;
+    }
+    return 0;
 }
-
