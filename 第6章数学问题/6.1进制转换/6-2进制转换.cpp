@@ -4,17 +4,17 @@
 
 using namespace std;
 
-//模拟除以2
-string div2(string str) {
-    int n=str.size();
-    string res(n,'0');
-    int bias=0,index=0;
-    for(int i=0;i<n;i++){
-        res[i]=(str[i]-'0'+bias*10)/2+'0';
-        bias=(str[i]-'0'+bias*10)%2;
+//字符串除法
+string divide(string str,int x) {
+    int remainder=0;//保留余数
+    for(int i=0; i<str.size(); i++) {
+        int current=str[i]-'0'+remainder*10;
+        str[i]=current/x+'0';
+        remainder=current%x;
     }
-    while(res[index++]=='0');
-    return res.substr(index-1);
+    int index=0;
+    while(str[index]=='0')index++;
+    return str.substr(index);
 }
 
 int main() {
@@ -25,9 +25,9 @@ int main() {
         while(str.size()!=0) {
             last=str[str.size()-1]-'0';
             binary.push_back(last%2);
-            str=div2(str);
+            str=divide(str,2);
         }
-        for(int i=binary.size()-1;i>=0;i--){
+        for(int i=binary.size()-1; i>=0; i--) {
             cout<<binary[i];
         }
         cout<<endl;

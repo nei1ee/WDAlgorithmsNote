@@ -1,64 +1,73 @@
 #include<iostream>
-#include<algorithm>
-#include<string.h>
+#include<string>
 #include<vector>
+#include<math.h>
+
 using namespace std;
-/**十进制与二进制 
-*思路：十进制转二进制，二进制逆序，二进制转十进制（乘一个不同的10指数后相加） 
-*注意：此题数据仍较大，1000位以内 
-*/
+/**
+此题数字为1000位，普通整型无法存储
+**/
 
-string divide2(const string &s){
-	//模拟手动除以2
-	const int n=s.size();
-	string res(n,'0');
-	int bias=0;
-	for(int i=0;i<n;++i){
-		res[i]=(s[i]-'0'+10*bias)/2+'0';
-		bias=(s[i]-'0'+10*bias)%2;
-	}
-	int index=0;
-	while(res[index]=='0')++index;
-	return res.substr(index);
+//字符串除法
+string divide(string str,int x) {
+    int remainder=0;//保留余数
+    for(int i=0; i<str.size(); i++) {
+        int current=str[i]-'0'+remainder*10;
+        str[i]=current/x+'0';
+        remainder=current%x;
+    }
+    int index=0;
+    while(str[index]=='0')index++;
+    return str.substr(index);
 }
 
-string multiple(string str,const int& x,int carry){
-	carry=0;//存储进位
-	for(int i=str.size()-1;i>=0;--i){
-		int curr=x*(str[i]-'0')+carry;
-		str[i]=curr%10+'0';
-		carry = curr/10;
-	} 
-	if(carry!=0)str=(char)('0'+carry)+str;
-	return str;
+//字符串乘法
+string mutiple(string str,int x) {
+    int carry=0;//保存进位
+    for(int i=str.size()-1; i>=0; i--) {
+        int current=x*(str[i]-'0')+carry;
+        str[i]=current%10+'0';
+        carry=current/10;
+    }
+    if(carry!=0) {
+        str="1"+str;
+    }
+    return str;
 }
 
-string add(string str,int x){
-	return multiple(str,1,x);
+//字符串加法
+string add(string str,int x) {
+    int carry=x;
+    for(int i=str.size()-1; i>=0; i--) {
+        int current=(str[i]-'0')+carry;
+        str[i]=current%10+'0';
+        carry=current/10;
+    }
+    if(carry!=0) {
+        str="1"+str;
+    }
+    return str;
 }
 
+int main() {
+    string str;
+    while(getline(cin,str)) {
+        vector<int> binary;
+        while(str.size()!=0) {
+            //最低位计算
+            int last=str[str.size()-1]-'0';
+            //取模运算
+            binary.push_back(last%2);
+            //整除运算
+            str=divide(str,2);
+        }
+        string answer="0";
+        for(int i=0; i<binary.size(); i++) {
+            answer=mutiple(answer,2);//乘法运算
+            answer=add(answer,binary[i]);//加法运算
+        }
+        cout<<answer<<endl;
+    }
 
-int main(){
-	vector<int> v;
-	string A;
-	int last;
-	while(cin>>A){
-		while(A.size()!=0){
-			last = A[A.size()-1]-'0';
-			v.push_back(last%2);
-			A = divide2(A);	
-		}
-		string ans = "0";
-		for(int i=0;i<v.size();++i){
-			ans = multiple(ans,2,0);
-			ans = add(ans,v[i]);
-			cout<<ans<<endl;
-		} 
-		cout<<ans<<endl;
-		
-	}
-	//v的正序即原数二进制逆序
-
-	return 0;
+    return 0;
 }
-
