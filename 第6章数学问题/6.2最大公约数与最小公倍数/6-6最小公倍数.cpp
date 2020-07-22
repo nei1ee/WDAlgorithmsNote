@@ -12,7 +12,7 @@ int GCD(int a,int b) {
 int main() {
     int a,b;
     while(~(scanf("%d%d",&a,&b))) {
-        cout<<GCD(a,b)<<endl;
+        cout<<(a*b)/GCD(a,b)<<endl;
     }
     return 0;
 }
