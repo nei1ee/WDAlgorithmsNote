@@ -8,38 +8,31 @@ using namespace std;
 *具体即不断剔除素数的倍数
 */
 
-const int MAXN=10001;
-//零初始化器，全部初始化为false
+const int MAXN=100000;
+const int MAXK=10000;
 bool isPrime[MAXN];
 vector<int> Prime;
 
-void initial() {
+void init() {
     fill_n(isPrime,MAXN,true);
     isPrime[0]=false;
     isPrime[1]=false;
-    for(int i=2; i<MAXN; ++i) {
+    for(int i=2; i<MAXN; i++) {
         if(!isPrime[i])continue;
         Prime.push_back(i);
         for(int j=i*i; j<MAXN; j+=i) {
             isPrime[j]=false;
         }
+        if(Prime.size()==MAXK)break;
     }
     return ;
 }
 
 int main() {
-    initial();
+    init();
     int n;
-    while(~scanf("%d",&n)) {
-        int count=0;
-        for(int i=0; i<Prime.size()&&Prime[i]<n; i++) {
-            if(Prime[i]%10==1) {
-                count++;
-                cout<<Prime[i]<<" ";
-            }
-        }
-        if(!count)cout<<"-1"<<endl;
+    while(scanf("%d",&n)!=EOF) {
+        cout<<Prime[n-1]<<endl;
     }
     return 0;
 }
-

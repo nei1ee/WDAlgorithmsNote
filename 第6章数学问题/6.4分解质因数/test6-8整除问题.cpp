@@ -1,16 +1,14 @@
 #include<iostream>
 #include<math.h>
-#include<vector>
 
 using namespace std;
 
-//两种选其一
-const int MAXN=35000;
-//const int MAXN=sqrt(1e9)+1;
+const int MAXN=1000;
 
 bool isPrime[MAXN];
 vector<int> prime;
 
+//求2-1000所有素数
 void init() {
     fill_n(isPrime,MAXN,true);
     isPrime[0]=false;
@@ -28,8 +26,8 @@ void init() {
 
 int main() {
     init();
-    int num;
-    while(scanf("%d",&num)!=EOF) {
+    int n,a;
+    while(scanf("%d%d",&n,&a)!=EOF) {
         int answer=0;
         for(int i=0; i<prime.size()&&prime[i]<num; i++) {
             int factor=prime[i];
@@ -41,7 +39,7 @@ int main() {
         if(num>1) {
             answer++;
         }
-        cout<<answer<<endl;
     }
     return 0;
 }
+
