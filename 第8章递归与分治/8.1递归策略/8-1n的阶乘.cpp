@@ -10,9 +10,9 @@ long long factorial(int n) {
     }
 }
 
-int main(){
+int main() {
     int n;
-    while(scanf("%d",&n)!=EOF){
+    while(scanf("%d",&n)!=EOF) {
         cout<<factorial(n)<<endl;
     }
     return 0;
