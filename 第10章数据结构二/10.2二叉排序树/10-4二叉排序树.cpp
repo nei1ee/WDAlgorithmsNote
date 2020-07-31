@@ -1,65 +1,70 @@
 #include<iostream>
-#include<algorithm>
-#include<string.h>
+
 using namespace std;
-/**二叉排序树 
-*思路：重点在于根据题目要求建立一棵二叉排序树 
-*重点定义好insert函数 
-*/
 
-struct Node{
-	int data;
-	Node* left;
-	Node* right;
-	Node(int c):data(c),left(NULL),right(NULL){};
+struct TreeNode {
+    int data;
+    TreeNode *leftChild;
+    TreeNode *rightChild;
+    TreeNode(int num):data(num),leftChild(NULL),rightChild(NULL) {};
 };
-//向给定二叉排序树insert 
-Node* Insert(Node* root,int x){
-	if(root == NULL)root = new Node(x);
-	else if(x<root->data)
-		root->left = Insert(root->left,x);
-	else if(x>root->data)
-		root->right = Insert(root->right,x);
-	return root;
+
+TreeNode* Insert(TreeNode*root,int data) {
+    if(root==NULL) {
+        //创建新节点
+        root=new TreeNode(data);
+    } else if(data<root->data) {
+        //插入左子树
+        root->leftChild=Insert(root->leftChild,data);
+    } else if(data>root->data)  {
+        //插入右子树
+        root->rightChild=Insert(root->rightChild,data);
+    }
+    return root;
 }
 
-void InOrder(Node* root){
-	if(root == NULL)return ;
-	InOrder(root->left);
-	cout<<root->data<<" ";
-	InOrder(root->right);
-	return ;
-} 
-
-void PreOrder(Node* root){
-	if(root == NULL)return ;
-	cout<<root->data<<" ";
-	PreOrder(root->left);
-	PreOrder(root->right);
-	return ;
-} 
-
-void PostOrder(Node* root){
-	if(root == NULL)return ;
-	PostOrder(root->left);
-	PostOrder(root->right);
-	cout<<root->data<<" ";
-	return ;
-} 
-
-int main(){
-	int n;int x;
-	while(cin>>n){
-		Node* root = NULL;
-		for(int i=0;i<n;++i){
-			cin>>x;
-			root = Insert(root,x);
-		}
-		PreOrder(root);cout<<endl;
-		InOrder(root);cout<<endl;
-		PostOrder(root);cout<<endl;
-	}
-
-	return 0;
+//前序遍历
+void PreOrder(TreeNode *root) {
+    if(root==NULL)return;
+    printf("%d ",root->data);
+    PreOrder(root->leftChild);
+    PreOrder(root->rightChild);
+    return;
 }
 
+//中序遍历
+void InOrder(TreeNode *root) {
+    if(root==NULL)return;
+    InOrder(root->leftChild);
+    printf("%d ",root->data);
+    InOrder(root->rightChild);
+    return;
+}
+
+//后序遍历
+void PostOrder(TreeNode *root) {
+    if(root==NULL)return;
+    PostOrder(root->leftChild);
+    PostOrder(root->rightChild);
+    printf("%d ",root->data);
+    return;
+}
+
+int main() {
+    int n;
+    while(scanf("%d",&n)!=EOF) {
+        TreeNode* root=NULL;
+        int data;
+        for(int i=0; i<n; i++) {
+            scanf("%d",&data);
+            root=Insert(root,data);
+        }
+        PreOrder(root);
+        printf("\n");
+        InOrder(root);
+        printf("\n");
+        PostOrder(root);
+        printf("\n");
+    }
+    return 0;
+}
