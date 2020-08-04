@@ -1,65 +1,41 @@
 #include<iostream>
-#include<algorithm>
-#include<string.h>
 using namespace std;
-/**畅通工程 
-*实现一个并查集（合并，查找并压缩） 
-*
-*/
+const int MAXN=1000;
+int father[MAXN];   //父亲节点
 
-#define MAXN 1000
-int father[MAXN];
-int height[MAXN]={0};
-
-//随着多组输入数据的输入，在每一组数据输入后都需要进行一次初始化 
-void Initial(const int &n){
-	//此处i应为1-n,与输入x,y范围对应 
-	for(int i=0;i<=n;++i){
-		father[i]=i;
-		height[i]=0;
-	}
+int Find(int x) {//寻找根节点
+    if(father[x]==-1) {
+        return x;
+    } else {
+        father[x]=Find(father[x]);
+        return father[x];
+    }
 }
 
-int Find(const int &x){
-	if(x!=father[x])father[x]=Find(father[x]);
-	return father[x];
+int main() {
+    int n,m;
+    while(scanf("%d",&n)!=EOF) {
+        if(n==0)break;
+        scanf("%d",&m);
+        for(int i=1; i<=n; i++) {
+            father[i]=-1;
+        }
+        for(int i=0; i<m; i++) {
+            int x,y;
+            scanf("%d %d",&x,&y);
+            x=Find(x);
+            y=Find(y);
+            if(x!=y) { //不在同一棵树上
+                father[y]=x;
+            }
+        }
+        int answer=-1;
+        for(int i=1; i<=n; i++) {
+            if(father[i]==-1) {
+                answer++;
+            }
+        }
+        printf("%d\n",answer);
+    }
+    return 0;
 }
-
-void Union(int x,int y){
-	x = Find(x);
-	y = Find(y);
-	if(x!=y){
-		if(height[x]<height[y])
-			father[x]=y;
-		else if(height[x]>height[y])
-			father[y]=x;
-		else{
-			father[y]=x;
-			++height[x];
-		}
-	}
-	return ;
-}
-
-int main(){
-	int n,m;
-	while(cin>>n){
-		if(n==0)break;
-		cin>>m;
-		Initial(n);
-		while(m--){
-			int x,y;
-			cin>>x>>y;
-			Union(x,y);
-		}
-		int answer = -1;
-		for(int i=1;i<=n;++i){
-			if(Find(i)==i)++answer;
-		}
-		cout<<answer<<endl;
-	}
-
-
-	return 0;
-}
-
