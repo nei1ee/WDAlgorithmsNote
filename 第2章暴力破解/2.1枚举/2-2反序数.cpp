@@ -1,21 +1,21 @@
 #include<iostream>
-#include<cstdio>
 
 using namespace std;
 
-int main(){
-    for(int a=1;a<10;a++){
-        for(int b=0;b<10;b++){
-            for(int c=0;c<10;c++){
-                for(int d=0;d<10;d++){
-                    int s=a*1000+b*100+c*10+d;
-                    if(9*s==(d*1000+c*100+b*10+a)){
-                        printf("%d\n",s);
-                    }
-                }
-            }
+int Reverse(int x) {
+    int rev=0;
+    while(x!=0) {
+        rev=rev*10+x%10;
+        x/=10;
+    }
+    return rev;
+}
+
+int main() {
+    for(int i=1000; i<=1111; i++) {
+        if(i*9==Reverse(i)) {
+            printf("%d\n",i);
         }
     }
-
     return 0;
 }
