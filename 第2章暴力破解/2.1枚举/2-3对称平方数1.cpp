@@ -1,28 +1,21 @@
 #include<iostream>
-#include<cstdio>
 
 using namespace std;
-int re(int x)
-{
-    int s=0;
-    while(x!=0)
-    {
-        s=s*10;
-        s+=x%10;
-        x=x/10;
+
+int Reverse(int x) {
+    int rev=0;
+    while(x!=0) {
+        rev=rev*10+x%10;
+        x/=10;
     }
-    return s;
+    return rev;
 }
 
-int main()
-{
-    for(int i=0; i<256; i++)
-    {
-        if(i*i==re(i*i))
-        {
+int main() {
+    for(int i=0; i<=256; i++) {
+        if(i*i==Reverse(i*i)) {
             printf("%d\n",i);
         }
     }
-
     return 0;
 }
