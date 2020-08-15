@@ -1,46 +1,30 @@
 #include<iostream>
-#include<cstdio>
-
 using namespace std;
 
-bool isseven(int x)
-{
-    bool p=false;
-    if(x%7==0)
-    {
-        p=true;
-    }
-    else
-    {
-        while(x!=0)
-        {
-            if(x%10==7)
-            {
-                p=true;
-                break;
+bool isSeven(int x) {
+    if(x%7==0) {
+        return true;
+    } else {
+        while(x!=0) {
+            if(x%10==7) {
+                return true;
             }
-            else
-            {
-                x=x/10;
-            }
+            x=x/10;
         }
     }
-    return p;
+    return false;
 }
 
-int main()
-{
+int main() {
     int n;
-    int s=0;
-    scanf("%d",&n);
-    for(int i=0; i<=n; i++)
-    {
-        if(!isseven(i))
-        {
-            s=s+i*i;
+    while(scanf("%d",&n)!=EOF) {
+        int sum=0;
+        for(int i=0; i<=n; i++) {
+            if(!isSeven(i)) {
+                sum=sum+i*i;
+            }
         }
+        printf("%d\n",sum);
     }
-    printf("%d",s);
-
     return 0;
 }
