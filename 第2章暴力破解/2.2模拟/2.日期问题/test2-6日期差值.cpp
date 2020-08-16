@@ -1,55 +1,44 @@
 #include<iostream>
-
 using namespace std;
-int days[2][13]=
-{
+int daytab[2][13]= {
     {0,31,28,31,30,31,30,31,31,30,31,30,31},
     {0,31,29,31,30,31,30,31,31,30,31,30,31}
 };
-
-bool isLeapYear(int year)
-{
+//判断是否闰年
+bool isLeapYear(int year) {
     return (year%400==0||(year%4==0&&year%100!=0));
 }
-
-int numberOfyear(int year)
-{
-    if(isLeapYear(year))
-    {
+//某一年有多少天
+int dayOfYear(int year) {
+    if(isLeapYear(year)) {
         return 366;
     }
-    else
-    {
-        return 365;
+    return 365;
+}
+//某年的某天是今年的第几天
+int daysOfYear(int year,int month,int day) {
+    int row=isLeapYear(year);
+    int days=0;
+    for(int i=1; i<month; i++) {
+        days+=daytab[row][i];
     }
+    days+=day;
+    return days;
 }
 
-int daysofyear(int year,int month,int day)
-{
-    int leap=isLeapYear(year);
-    int sumdays=0;
-    for(int i=1; i<month; i++)
-    {
-        sumdays+=days[leap][i];
-    }
-    sumdays+=day;
-    return sumdays;
-}
-
-int main()
-{
+int main() {
     int m,n;
-    while(scanf("%d",&m)!=EOF){
+    while(scanf("%d",&m)!=EOF) {
         scanf("%d",&n);
-        int y1=m/10000;
-        int y2=n/10000;
-        int sum=0;
-        int days1=daysofyear(y1,m/100%100,m%100);
-        int days2=daysofyear(y2,n/100%100,n%100);
-        for(int i=y1;i<y2;i++){
-            sum+=numberOfyear(i);
+        int year1=m/10000,year2=n/10000,days=0;
+        //第一个日期是其年的第几天
+        int days1=daysOfYear(year1,m/100%100,m%100);
+        //第二个日期是其年的第几天
+        int days2=daysOfYear(year2,n/100%100,n%100);
+        for(int i=year1; i<year2; i++) {//计算年与年之间的天数
+            days+=dayOfYear(i);
         }
-        printf("%d",days2-days1+sum+1);
+        printf("%d",days2-days1+1+days);
     }
     return 0;
 }
