@@ -39,6 +39,7 @@ int main()
         while(add>daysofyear(year))
         {
             add-=daysofyear(year);
+        while(days>dayOfYear(year)){
             year++;
         }
         leap=isLeapYear(year);
