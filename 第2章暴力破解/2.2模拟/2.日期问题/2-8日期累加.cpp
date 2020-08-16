@@ -1,55 +1,42 @@
 #include<iostream>
-
 using namespace std;
-int days[2][13]=
-{
+int daytab[2][13]= {
     {0,31,28,31,30,31,30,31,31,30,31,30,31},
     {0,31,29,31,30,31,30,31,31,30,31,30,31}
 };
-
-bool isLeapYear(int year)
-{
+//判断是否闰年
+bool isLeapYear(int year) {
     return (year%400==0||(year%4==0&&year%100!=0));
 }
-int daysofyear(int year)
-{
-    if(isLeapYear(year))
-    {
+//某一年有多少天
+int dayOfYear(int year) {
+    if(isLeapYear(year)) {
         return 366;
     }
-    else
-    {
-        return 365;
-    }
+    return 365;
 }
-int main()
-{
-    int t;
-    scanf("%d",&t);
-    while(t--)
-    {
-        int year,month,day,add;
-        scanf("%d %d %d %d",&year,&month,&day,&add);
-        int leap=isLeapYear(year);
-        for(int i=1; i<month; i++)
-        {
-            add+=days[leap][i];
+
+int main() {
+    int caseNumber;
+    scanf("%d",&caseNumber);
+    while(caseNumber--) {
+        int year,month,day,days;
+        scanf("%d%d%d%d",&year,&month,&day,&days);
+        int row=isLeapYear(year);
+        for(int i=1;i<month;i++){
+            days+=daytab[row][i];
         }
-        add+=day;
-        while(add>daysofyear(year))
-        {
-            add-=daysofyear(year);
+        days+=day;//计算一共多少天
+        while(days>dayOfYear(year)){
+            days-=dayOfYear(year);//先减天数
             year++;
         }
-        leap=isLeapYear(year);
-        month=0;
-        while(add>days[leap][month])
-        {
-            add-=days[leap][month];
+        row=isLeapYear(year),month=1,day=days;
+        while(day>daytab[row][month]){
+            day-=daytab[row][month];
             month++;
         }
-        printf("%04d-%02d-%02d\n",year,month,add);
+        printf("%04d-%02d-%02d\n",year,month,day);
     }
-
     return 0;
 }

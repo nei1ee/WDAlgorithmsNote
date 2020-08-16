@@ -3,7 +3,7 @@
 using namespace std;
 
 //月份对应天数
-int daystab[2][13]= {
+int daytab[2][13]= {
     {0,31,28,31,30,31,30,31,31,30,31,30,31},
     {0,31,29,31,30,31,30,31,31,30,31,30,31}
 };
@@ -21,20 +21,20 @@ char weektab[8][10]= {
 bool isLeapYear(int year) {
     return (year%400==0||(year%4==0&&year%100!=0));
 }
-//某一天是该年的第几天
-int daysofyear(int year,int month,int day) {
-    int leap=isLeapYear(year);
-    int sumdays=0;
+//某年的某天是今年的第几天
+int daysOfYear(int year,int month,int day) {
+    int row=isLeapYear(year);
+    int days=0;
     for(int i=1; i<month; i++) {
-        sumdays+=daystab[leap][i];
+        days+=daytab[row][i];
     }
-    sumdays+=day;
-    return sumdays;
+    days+=day;
+    return days;
 }
 //月份转整数,
-int monthbymonth(char* month) {
+int month2int(char* month) {
     for(int i=1; i<=12; i++) {
-        if(strcmp(month,monthtab[i])==0) {
+        if(!strcmp(month,monthtab[i])) {
             return i;
         }
     }
@@ -45,8 +45,8 @@ int main() {
     int day,year;
     char month[10];
     while(scanf("%d %s %d",&day,month,&year)!=EOF) {
-        int mon=monthbymonth(month);
-        int days=daysofyear(year,mon,day);
+        int mon=month2int(month);
+        int days=daysOfYear(year,mon,day);
         int week=year-1+(year-1)/4-(year-1)/100+(year-1)/400+days;
         printf("%s\n",weektab[week%7]);
     }
