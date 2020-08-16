@@ -2,7 +2,7 @@
 using namespace std;
 
 //月份对应天数
-int daystab[2][13]= {
+int daytab[2][13]= {
     {0,31,28,31,30,31,30,31,31,30,31,30,31},
     {0,31,29,31,30,31,30,31,31,30,31,30,31}
 };
@@ -12,12 +12,12 @@ bool isLeapYear(int year) {
 }
 
 int main() {
-    int t,year,month,day;
-    scanf("%d",&t);
-    while(t--) {
+    int caseNumber,year,month,day;
+    scanf("%d",&caseNumber);
+    while(caseNumber--) {
         scanf("%d %d %d",&year,&month,&day);
         int isleap=isLeapYear(year);
-        if(day+1>daystab[isleap][month]) {
+        if(day+1>daytab[isleap][month]) {
             day=1;
             if(month+1>12) {
                 month=1;
