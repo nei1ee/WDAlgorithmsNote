@@ -3,17 +3,16 @@
 
 using namespace std;
 
-//¶ş·Ö²éÕÒ
 bool BinarySearch(int n,int target,int num[]) {
     int left=0,right=n-1;
     while(left<=right) {
         int middle=(left+right)/2;
-        if(num[middle]<target) {
-            left=middle+1;
-        } else if(num[middle]>target) {
+        if(target==num[middle]) {
+            return true;
+        } else if(target<num[middle]) {
             right=middle-1;
         } else {
-            return true;
+            left=middle+1;
         }
     }
     return false;
