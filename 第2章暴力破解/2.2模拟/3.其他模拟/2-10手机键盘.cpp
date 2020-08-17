@@ -14,6 +14,7 @@ int main() {
         char temp;
         for(int i=0; i<str.size(); i++) {
             time+=keytab[str[i]-'a'];
+            //按键差值等于字母差值则在一个按键上
             if(i>0&&(str[i]-temp)==(keytab[str[i]-'a']-keytab[temp-'a'])) {
                 time+=2;
             }
