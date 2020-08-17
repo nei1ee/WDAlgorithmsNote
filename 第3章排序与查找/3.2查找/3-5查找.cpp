@@ -1,8 +1,6 @@
 #include<iostream>
 #include<algorithm>
-
 using namespace std;
-
 bool BinarySearch(int n,int target,int num[]) {
     int left=0,right=n-1;
     while(left<=right) {
