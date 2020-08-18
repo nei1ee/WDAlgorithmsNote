@@ -1,11 +1,9 @@
 #include<iostream>
 #include<string>
-
 using namespace std;
-
 //是否是小写字母
-bool ischar(char x){
-    if(x>='a'&&x<='z'){
+bool ischar(char x) {
+    if(x>='a'&&x<='z') {
         return true;
     }
     return false;
@@ -14,11 +12,11 @@ bool ischar(char x){
 int main() {
     string str;
     while(getline(cin,str)) {
-            if(ischar(str[0])){
-                cout<<(char)(str[0]-'a'+'A');
-            }else{
-                cout<<(char)str[0];
-            }
+        if(ischar(str[0])) {
+            cout<<(char)(str[0]-'a'+'A');
+        } else {
+            cout<<(char)str[0];
+        }
 
         bool isblank=false;//空白符分隔标记
         for(int i=1; i<str.size(); i++) {

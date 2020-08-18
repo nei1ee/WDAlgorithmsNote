@@ -19,7 +19,7 @@ long int skew(string num) {
 
 int main() {
     string str;
-    while(cin>>str){
+    while(cin>>str) {
         cout<<skew(str)<<endl;
     }
     return 0;
