@@ -1,37 +1,35 @@
 #include<iostream>
 #include<queue>
-
 using namespace std;
 
 int main() {
-    //n，n个小孩；p开始报数；m间隔
     int n,p,m;
-    while(scanf("%d%d%d",&n,&p,&m)!=EOF) {
+    while(scanf("%d%d%d",&n,&p,&m)) {
         if(n==0&&p==0&&m==0) {
             break;
         }
-        queue<int> children;
-        //初始化队列
+        queue<int> myQueue;
         for(int i=0; i<n; i++) {
-            children.push(i+1);
+            myQueue.push(i+1);
         }
-        //使序号为p的小孩到队首
         for(int i=1; i<p; i++) {
-            children.push(children.front());
-            children.pop();
+            myQueue.push(myQueue.front());
+            myQueue.pop();
         }
-        while(!children.empty()) {
+        while(!myQueue.empty()) {
             for(int i=1; i<m; i++) {
-                children.push(children.front());
-                children.pop();
+                myQueue.push(myQueue.front());
+                myQueue.pop();
             }
-            if(children.size()==1) {
-                printf("%d\n",children.front());
+            if(myQueue.size()==1) {
+                printf("%d",myQueue.front());
+                myQueue.pop();
             } else {
-                printf("%d,",children.front());
+                printf("%d,",myQueue.front());
+                myQueue.pop();
             }
-            children.pop();
         }
+        printf("\n");
     }
     return 0;
 }

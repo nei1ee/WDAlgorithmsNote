@@ -19,9 +19,11 @@ int main() {
                 }
             } else if(str[i]=='(') {
                 brackets.push(i);
+            } else {
+                continue;
             }
         }
-        while(!brackets.empty()){
+        while(!brackets.empty()) {
             answer[brackets.top()]='$';
             brackets.pop();
         }
