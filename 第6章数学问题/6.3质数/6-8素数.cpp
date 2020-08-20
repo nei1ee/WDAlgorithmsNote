@@ -9,36 +9,37 @@ using namespace std;
 */
 
 const int MAXN=10001;
-//零初始化器，全部初始化为false
 bool isPrime[MAXN];
-vector<int> Prime;
+vector<int> prime;
 
-void initial() {
-    fill_n(isPrime,MAXN,true);
+void Init() {
+    for(int i=0; i<MAXN; i++) {
+        isPrime[i]=true;
+    }
     isPrime[0]=false;
     isPrime[1]=false;
-    for(int i=2; i<MAXN; ++i) {
+    for(int i=2; i<MAXN; i++) {
         if(!isPrime[i])continue;
-        Prime.push_back(i);
+        prime.push_back(i);
         for(int j=i*i; j<MAXN; j+=i) {
             isPrime[j]=false;
         }
     }
-    return ;
 }
 
 int main() {
-    initial();
+    Init();
     int n;
-    while(~scanf("%d",&n)) {
-        int count=0;
-        for(int i=0; i<Prime.size()&&Prime[i]<n; i++) {
-            if(Prime[i]%10==1) {
-                count++;
-                cout<<Prime[i]<<" ";
+    while(scanf("%d",&n)!=EOF) {
+        bool out=false;
+        for(int i=0; i<prime.size()&&prime[i]<n; i++) {
+            if(prime[i]%10==1) {
+                out=true;
+                printf("%d ",prime[i]);
             }
         }
-        if(!count)cout<<"-1"<<endl;
+        if(!out)printf("-1");
+        printf("\n");
     }
     return 0;
 }
