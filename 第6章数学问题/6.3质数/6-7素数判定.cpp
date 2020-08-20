@@ -3,24 +3,25 @@
 
 using namespace std;
 
-bool judge(int x){
-    if(x<2){
+bool judge(int x) {
+    if(x<2) {
         return false;
-    }
-    for(int i=2;i<=sqrt(x);i++){
-        if(x%i==0){
-            return false;
+    } else {
+        for(int i=2; i<=sqrt(x); i++) {
+            if(x%i==0) {
+                return false;
+            }
         }
+        return true;
     }
-    return true;
 }
 
-int main(){
+int main() {
     int n;
-    while(~scanf("%d",&n)){
-        if(judge(n)){
+    while(scanf("%d",&n)!=EOF) {
+        if(judge(n)) {
             cout<<"yes"<<endl;
-        }else{
+        } else {
             cout<<"no"<<endl;
         }
     }
