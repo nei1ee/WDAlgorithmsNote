@@ -1,10 +1,8 @@
 #include<iostream>
-
 using namespace std;
-//约数的个数
 
 int yueshu(int num) {
-    int answer=0,i;
+    int i,answer=0;
     for(i=1; i*i<num; i++) {
         if(num%i==0) {
             answer+=2;
@@ -15,11 +13,12 @@ int yueshu(int num) {
 }
 
 int main() {
-    int n,num;
+    int n;
     while(scanf("%d",&n)!=EOF) {
         for(int i=0; i<n; i++) {
+            int num;
             scanf("%d",&num);
-            cout<<yueshu(num)<<endl;
+            printf("%d\n",yueshu(num));
         }
     }
     return 0;
