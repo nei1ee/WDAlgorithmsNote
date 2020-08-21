@@ -11,23 +11,23 @@ const int MAXN=35000;
 bool isPrime[MAXN];
 vector<int> prime;
 
-void init() {
-    fill_n(isPrime,MAXN,true);
+void Init() {
+    for(int i=0; i<MAXN; i++) {
+        isPrime[i]=true;
+    }
     isPrime[0]=false;
     isPrime[1]=false;
     for(int i=2; i<MAXN; i++) {
         if(!isPrime[i])continue;
         prime.push_back(i);
         for(int j=i*i; j<MAXN; j+=i) {
-            //质数的倍数为非质数
-            isPrime[j]=false;
+            isPrime[i]=false;
         }
     }
-    return ;
 }
 
 int main() {
-    init();
+    Init();
     int num;
     while(scanf("%d",&num)!=EOF) {
         int answer=0;
@@ -38,10 +38,8 @@ int main() {
                 answer++;
             }
         }
-        if(num>1) {
-            answer++;
-        }
-        cout<<answer<<endl;
+        if(num>1)answer++;
+        printf("%d\n",answer);
     }
     return 0;
 }
