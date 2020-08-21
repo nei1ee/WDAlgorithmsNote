@@ -6,10 +6,8 @@ using namespace std;
 *本题最终mod 1000
 */
 int FastExponentiation(int a,int b,int mod) {
-    //初始化为1
     int answer=1;
     while(b!=0) {
-        //不断将b转换为2进制
         if(b%2==1) {
             answer*=a;
             answer%=mod;
@@ -20,8 +18,6 @@ int FastExponentiation(int a,int b,int mod) {
     }
     return answer;
 }
-
-
 int main() {
     int a,b;
     while(scanf("%d%d",&a,&b)!=EOF) {
