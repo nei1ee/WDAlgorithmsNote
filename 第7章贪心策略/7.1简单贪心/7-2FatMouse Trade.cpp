@@ -1,6 +1,5 @@
 #include<iostream>
 #include<algorithm>
-
 using namespace std;
 /**
 考虑性价比最高优先
@@ -22,21 +21,20 @@ int main() {
     while(scanf("%d%d",&m,&n)!=EOF) {
         if(m==-1&&n==-1)break;
         for(int i=0; i<n; i++) {
-            scanf("%lf%lf",&bean[i].weight,&bean[i].cost);
+            scanf("%lf%lf",&bean[i].weight,&bean[i].weight);
         }
         sort(bean,bean+n,Compare);
         double answer=0;
         for(int i=0; i<n; i++) {
-            if(m>bean[i].cost) {
-                answer+=bean[i].weight;
+            if(m>=bean[i].cost) {
                 m-=bean[i].cost;
+                answer+=bean[i].weight;
             } else {
-                answer+=(bean[i].weight/bean[i].cost)*m;
+                answer+=(m/bean[i].cost)*bean[i].weight;
                 break;
             }
         }
-        printf("%0.3f\n",answer);
+        printf("%.3f\n",answer);
     }
-
     return 0;
 }
