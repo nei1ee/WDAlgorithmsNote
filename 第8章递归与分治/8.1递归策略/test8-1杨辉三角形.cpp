@@ -1,7 +1,5 @@
 #include<iostream>
-
 using namespace std;
-
 int fun(int x,int y) {
     if(y==1||x==y) {
         return 1;

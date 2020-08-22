@@ -8,9 +8,7 @@ using namespace std;
 
 void print(int num) {
     int i=0;
-    while(pow(2,i)<=num) {
-        i++;
-    }
+    while(pow(2,i)<=num)i++;
     i--;
     if(i==0) {
         printf("2(0)");
