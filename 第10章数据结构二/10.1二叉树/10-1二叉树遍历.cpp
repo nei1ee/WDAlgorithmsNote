@@ -8,13 +8,16 @@ struct TreeNode {
     TreeNode(char c):data(c),leftChild(NULL),rightChild(NULL) {};
 };
 
-TreeNode* Build(int &position,string str) {
+TreeNode *Build(int &position,string str) {
     char c=str[position++];
     if(c=='#') {
         return NULL;
     }
+    //创建新节点
     TreeNode *root=new TreeNode(c);
+    //创建左子树
     root->leftChild=Build(position,str);
+    //创建右子树
     root->rightChild=Build(position,str);
     return root;
 }
@@ -36,7 +39,6 @@ int main() {
         InOrder(root);
         printf("\n");
     }
-
     return 0;
 }
 
