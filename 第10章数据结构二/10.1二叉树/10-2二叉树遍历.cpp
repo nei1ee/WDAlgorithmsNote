@@ -8,17 +8,17 @@ struct TreeNode {
     TreeNode(char c):data(c),leftChild(NULL),rightChild(NULL) {};
 };
 
-TreeNode* Build(string str1,string str2) {
+TreeNode *Build(string str1,string str2) {
     if(str1.size()==0) {
         return NULL;
     }
-    //µ±Ç°×Ö·û
     char c=str1[0];
-    TreeNode *root=new TreeNode(c);
-    //Ñ°ÕÒÇÐ·Öµã
-    int position=str2.find(c);
-    root->leftChild=Build(str1.substr(1,position),str2.substr(0,position));
-    root->rightChild=Build(str1.substr(position+1),str2.substr(position+1));
+    //åˆ›å»ºæ–°èŠ‚ç‚¹
+    TreeNode *root = new TreeNode(c);
+    //å¯»æ‰¾åˆ‡åˆ†ç‚¹
+    int pos=str2.find(c);
+    root->leftChild=Build(str1.substr(1,pos),str2.substr(0,pos));
+    root->rightChild=Build(str1.substr(pos+1),str2.substr(pos+1));
     return root;
 }
 
