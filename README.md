@@ -1,6 +1,9 @@
 # WDAlgorithmsNote
 
- 计算机考研第2版——机试指南笔记，书籍链接
+ 王道考研机试指南第2版——题目链接、代码
+ > 题解（书籍作者炉灰）：[例题代码](https://github.com/BenedictYoung/Lecture)   [习题代码](https://github.com/BenedictYoung/Practice)
+
+# 题目及链接
 
 ## 第2章 暴力求解
 
